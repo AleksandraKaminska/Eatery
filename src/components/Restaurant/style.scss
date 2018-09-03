@@ -1,0 +1,83 @@
+$side-padding: 25px;
+
+.business {
+  font-size: 18px;
+  header {
+    position: fixed;
+    svg path {
+      fill: white;
+    }
+  }
+  &__container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: contain;
+    color: #222;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+  }
+  &__info {
+    position: absolute;
+    top: 48%;
+    z-index: 1;
+    right: 0;
+    left: 0;
+  }
+  &__details {
+    position: relative;
+    background: white;
+    padding: 15px 20px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    width: 100%;
+    box-shadow: 0 2px 5px #ccc;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  &__categories {
+    color: #4990e2;
+    margin: 5px 0;
+    font-size: .8em;
+    letter-spacing: 1px;
+  }
+  &__name {
+    margin: 0;
+    font-size: 1.3em;
+    .price {
+      color: grey;
+      font-size: 0.6em;
+      letter-spacing: 4px;
+      font-weight: lighter;
+    }
+  }
+  &__price {
+    font-size: 0.7em;
+    letter-spacing: .2px;
+    color: grey;
+  }
+  &__contact {
+    font-size: .8em;
+    p {
+      margin: 5px 0;
+    }
+    span {
+      color: grey;
+    }
+  }
+  &__location {
+    margin: 5px 0;
+    letter-spacing: 1px;
+  }
+  &__cost {
+    text-transform: initial;
+  }
+  .map {
+    height: calc(100vh - 450px);
+    bottom: 0;
+    top: auto;
+  }
+}

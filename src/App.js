@@ -1,40 +1,36 @@
-import React, { Component } from 'react';
-import { apiKey, baseURL } from './const';
-import './App.css';
+import React, { PureComponent } from 'react';
+import { BrowserRouter as Router } from 'react-router-dom'
+import { Switch, Route } from 'react-router'
 
-class App extends Component {
-  fetchSearch = (text, location = 'warsaw', latitude, longitude, radius = 1000, categories, locale = 'en_US', sort_by = 'best_match', price = '1, 2, 3, 4', open_now = false) => {
-    const url = `${baseURL}businesses/search?term=${text}&location=${location}&latitude=${latitude}&longitude=${longitude}&radius=${radius}&categories=${categories}&locale=${locale}&sort_by=${sort_by}&price=${price}&open_now=${open_now}`
-    const obj = { headers: { Authorization: `Bearer ${apiKey}` } }
+import Loader from 'components/Loader'
+import Nearby from 'routes/Nearby'
+import Business from 'routes/Business'
+import 'App.css';
 
-    return fetch(url, obj)
-    .then(resp => resp.json())
-    .then(data => {
-        console.log(data.businesses);
-    })
+class App extends PureComponent {
+  constructor() {
+    super()
+    this.state = { coords: null }
   }
 
-
-  fetchAutocomplete = text => (
-    fetch(`${baseURL}autocomplete?text=${text}`, {
-      headers: { Authorization: `Bearer ${apiKey}` }
-    })
-    .then(resp => resp.json())
-    .then(data => {
-        console.log(data);
-    })
-  )
-
   componentDidMount() {
-    this.fetchSearch('carbonara', undefined, 52.22677894766508, 21.018218994140625, undefined, undefined, 'pl_PL', undefined, undefined, true)
-    this.fetchAutocomplete('carbonara')
+    navigator.geolocation.getCurrentPosition(({ coords }) => this.setState({ coords }))
   }
 
   render() {
-    return (
+    const { coords } = this.state
+
+    return coords ? (
       <div className="App">
+        <Router>
+          <Switch>
+            <Route exact path="/" component={location => <Nearby {...location} coords={coords} />} />
+            <Route exact path="/restaurant/:alias" component={location => <Business {...location} coords={coords} />} />
+            <Route component={location => <Nearby {...location} coords={coords} />} />
+          </Switch>
+        </Router>
       </div>
-    );
+    ) : <Loader />
   }
 }
 

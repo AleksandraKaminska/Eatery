@@ -1,0 +1,31 @@
+.search {
+  $icon-size: 40px;
+  $main-color: transparent;
+
+  height: 40px;
+  * {
+    outline: none;
+  }
+  .search__wrapper {
+    display: flex;
+  }
+  .search__field {
+      background: transparent;
+      height: $icon-size;
+      font-size: 1.35em;
+      padding: .35em 0 .35em ($icon-size);
+      border: 1px solid transparent;
+      border-bottom-color: #ccc;
+      width: 35vw;
+      font-family: 'Roboto Condensed', sans-serif;
+      text-transform: uppercase;
+      margin-right: 5vw;
+  }
+  .search__icon {
+    align-self: center;
+    pointer-events: none;
+    display: inline-block;
+    color: #333;
+    margin-right: -$icon-size / 1.5;
+  }
+}
